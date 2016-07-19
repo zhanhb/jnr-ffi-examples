@@ -3,6 +3,7 @@ package qsort;
 
 import jnr.ffi.LibraryLoader;
 import jnr.ffi.Memory;
+import jnr.ffi.Platform;
 import jnr.ffi.Pointer;
 import jnr.ffi.Runtime;
 import jnr.ffi.annotations.Delegate;
@@ -40,7 +41,7 @@ public class Qsort {
 
     public static void main(String[] args) {
 
-        LibC libc = LibraryLoader.create(LibC.class).load("c");
+        LibC libc = LibraryLoader.create(LibC.class).load(Platform.getNativePlatform().getOS() == Platform.OS.WINDOWS ? "msvcrt" : "c");
 
         int[] numbers = { 2, 1 };
         System.out.println("qsort using java int[] array");
